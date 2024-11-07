@@ -11,7 +11,7 @@
 	<input id="id_x" type="text" name="kwota"/><br />
 	<label for="id_y">Oprocentowanie</label>
 	<input id="id_y" type="text" name="procent"/><br />
-	<label for="id_z">Liczba miesięcy </label>
+	<label for="id_z">Liczba lat </label>
 	<input id="id_z" type="text" name="lata"/><br />
 	<input type="submit" value="Oblicz" />
 </form>	
