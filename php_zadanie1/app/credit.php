@@ -40,8 +40,6 @@ if (empty( $messages )) {
     
 }
 
-include 'credit_view.php';
-
 if (empty ( $messages )) {
     
     
@@ -60,3 +58,4 @@ foreach($messages as $tabelka){
     echo  $tabelka . "<br/>" ; 
 }
 
+include 'credit_view.php';
