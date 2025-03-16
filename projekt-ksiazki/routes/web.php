@@ -91,6 +91,16 @@ Route::post('/moderator/delete-user/{id}', function ($id) {
 })->name('moderator.deleteUser');
 Route::post('/moderator/update-email/{id}', function ($id, Request $request) {
     $user = \App\Models\User::findOrFail($id);
+    
+    if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {
+        return redirect()->route('moderator.panel')->with('error', 'Wprowadź poprawny adres e-mail.');
+    }
+    
+    if (\App\Models\User::where('email', $request->input('email'))->where('id', '!=', $user->id)->exists()) {
+        return redirect()->route('moderator.panel')->with('error', 'Ten e-mail jest już zajęty.');
+    }
+    
+    
     $user->email = $request->input('email');
     $user->save();
     
@@ -99,6 +109,12 @@ Route::post('/moderator/update-email/{id}', function ($id, Request $request) {
 
 Route::post('/moderator/update-password/{id}', function ($id, Request $request) {
     $user = \App\Models\User::findOrFail($id);
+    $haslo = $request->input('haslo');
+    $haslo_confirmation = $request->input('haslo_confirmation');
+    if ($haslo !== $haslo_confirmation) {
+        return redirect()->route('moderator.panel')->with('error', 'Hasła nie są identyczne!');
+    }
+
     $user->haslo = $request->input('haslo'); 
     $user->save();
     

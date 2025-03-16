@@ -134,7 +134,8 @@
                     <td>
                         <form method="POST" action="{{ route('moderator.updatePassword', $userItem->id) }}">
                             @csrf
-                            <input type="text" class="form-control" name="haslo" placeholder="Nowe hasło" required>
+                            <input type="password" class="form-control" name="haslo" placeholder="Nowe hasło" required>
+                            <input type="password" class="form-control" name="haslo_confirmation" placeholder="Potwierdź hasło" required>
                             <button type="submit" class="btn btn-primary btn-sm mt-2">Zmień hasło</button>
                         </form>
                     </td>
