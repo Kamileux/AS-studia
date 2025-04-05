@@ -17,16 +17,7 @@ class User extends Model
     const UPDATED_AT = 'zaaktualizowano';
 
 
-    public function ulubionaKsiazka()
-    {
-        return $this->belongsTo(Ksiazka::class, 'ulubiona_ksiazka_id');
-    }
-    
-    public function najmniejLubianaKsiazka()
-    {
-        return $this->belongsTo(Ksiazka::class, 'najmniej_lubiana_ksiazka_id');
-    }
-
+  
 
 
 

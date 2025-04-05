@@ -159,6 +159,22 @@ h1.text-center {
     color: white !important;
     font-weight: bold;
 }
+
+.pagination .page-item.active .page-link {
+    background-color: #1A3636; 
+    border-color: #1A3636; 
+    color: white;
+}
+
+.pagination .page-link {
+    color: #1A3636; 
+}
+
+.pagination .page-link:hover {
+    background-color: #677D6A; 
+    border-color: #677D6A; 
+    color: white; 
+}
 }
     </style>
 </head>
@@ -190,7 +206,7 @@ h1.text-center {
         <form method="GET" action="{{ route('books') }}" class="mb-4">
             <div class="row">
                 <div class="col-md-4">
-                    <input type="text" name="search" class="form-control" placeholder="Szukaj książki..." value="{{ request('search') }}">
+                    <input type="text" name="search" class="form-control" placeholder="Szukaj książki lub autora..." value="{{ request('search') }}">
                 </div>
                 <div class="col-md-3">
                     <select name="category" class="form-control">
@@ -215,18 +231,26 @@ h1.text-center {
         </form>
 
         <div class="row">
-            @forelse ($books as $book)
-                <div class="col-md-4">
-                    <div class="book-tile">
-                        <h4>{{ $book->tytul }}</h4>
-                        <p>Autor: {{ $book->autor }}</p>
-                        <button class="btn btn-primary" onclick="openModal({{ $book->id }}, '{{ $book->tytul }}')">Dodaj na listę</button>
-                    </div>
-                </div>
-            @empty
-                <p class="text-center">Brak książek do wyświetlenia.</p>
-            @endforelse
+    @forelse ($books as $book)
+        <div class="col-md-4">
+            <div class="book-tile">
+                <h4>{{ $book->tytul }}</h4>
+                <p>Autor: {{ $book->autor }}</p>
+                <button class="btn btn-primary" onclick="openModal({{ $book->id }}, '{{ $book->tytul }}')">Dodaj na listę</button>
+            </div>
         </div>
+    @empty
+        <p class="text-center">Brak książek do wyświetlenia.</p>
+    @endforelse
+</div>
+
+
+<div class="justify-content-center text-center">
+    <p>Wyświetlanie od {{ $books->firstItem() }} do {{ $books->lastItem() }} z {{ $books->total() }} wyników</p>
+</div>
+<div class="d-flex justify-content-center">
+    {{ $books->links() }}
+</div>
     </main>
 
     <footer class="text-center py-3">

@@ -8,14 +8,11 @@ class BookController extends Controller
 {
     public function index(Request $request)
     {
-        
         $search = $request->input('search');
         $category = $request->input('category');
-        $sortOrder = $request->input('sort', 'asc'); 
+        $sortOrder = $request->input('sort', 'asc');
         
-       
         $categories = DB::table('kategorie')->get();
-        
         
         $query = DB::table('ksiazki');
         
@@ -32,11 +29,12 @@ class BookController extends Controller
         
         $query->orderBy('tytul', $sortOrder);
         
-        $books = $query->get();
+        //stronnicowanie
+        $books = $query->paginate(15);
         
         return view('books.books', compact('books', 'categories', 'search', 'category', 'sortOrder'));
-        
     }
+    
 
     public function addToList($id, Request $request)
     {

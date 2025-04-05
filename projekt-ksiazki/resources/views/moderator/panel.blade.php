@@ -169,6 +169,7 @@
                 @endforeach
             </tbody>
         </table>
+      
     </main>
 
     <!-- Stopka -->

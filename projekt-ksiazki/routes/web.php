@@ -41,6 +41,7 @@ Route::get('/moderator', function (Request $request) {
         $user = session('user');
         
         $query = \App\Models\User::query();
+       
         
         
         if ($request->has('search')) {
@@ -61,6 +62,7 @@ Route::get('/moderator', function (Request $request) {
         } else {
             return redirect()->route('home');
         }
+        
         
         return view('moderator.panel', compact('users', 'user'));
     }
@@ -128,7 +130,7 @@ Route::get('/moderator/books', function (Request $request) {
         
         if ($user->rola === 'moderator' || $user->rola === 'administrator') {
             $query = \App\Models\Ksiazka::query();
-            
+            $booksy = $query->paginate(15);
           
             $categories = \App\Models\Kategoria::pluck('nazwa');
             
@@ -145,7 +147,7 @@ Route::get('/moderator/books', function (Request $request) {
           
             $books = $query->get();
             
-            return view('moderator.books', compact('books', 'user', 'categories'));
+            return view('moderator.books', compact('books', 'user', 'categories', 'booksy'));
         }
     }
     return redirect()->route('home');
@@ -226,7 +228,7 @@ Route::post('/moderator/books/delete/{id}', function ($id) {
     return redirect()->route('moderator.books')->with('error', 'Brak uprawnień do usunięcia książki.');
 })->name('moderator.books.delete');
 
-//banomwanie
+//banowanie
 Route::post('/moderator/ban-user/{id}', function ($id) {
     $user = \App\Models\User::findOrFail($id);
     $user->banned = 1;
