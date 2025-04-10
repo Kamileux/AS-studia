@@ -5,7 +5,7 @@
 - Dodanie stronicowania w panelu moderatora panel.blade.php i books.blade.php i metody w web.php 
 
 TODO
-- Zewnętrzny cs dla lepszej czytelności kodu
+- Zewnętrzny css dla lepszej czytelności kodu
 - Metody z routingu do osobnego kontrolera jednak
 - Styl dla nawigacji paginatora żeby nie wchodził na stopkę
 
