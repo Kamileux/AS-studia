@@ -60,7 +60,24 @@
             color: white;
             text-align: center;
             padding: 10px 0;
+            
+            
         }
+   .pagination .page-item.active .page-link {
+    background-color: #1A3636; 
+    border-color: #1A3636; 
+    color: white;
+}
+
+.pagination .page-link {
+    color: #1A3636; 
+}
+
+.pagination .page-link:hover {
+    background-color: #677D6A; 
+    border-color: #677D6A; 
+    color: white; 
+}
     </style>
 </head>
 <body>
@@ -169,7 +186,9 @@
                 @endforeach
             </tbody>
         </table>
-      
+      <div class="mt-4">
+    {{ $users->links() }}
+</div>
     </main>
 
     <!-- Stopka -->

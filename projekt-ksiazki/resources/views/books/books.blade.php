@@ -159,6 +159,11 @@ h1.text-center {
     color: white !important;
     font-weight: bold;
 }
+  .pagination {
+    position: relative;
+    z-index: 0; 
+    
+}
 
 .pagination .page-item.active .page-link {
     background-color: #1A3636; 

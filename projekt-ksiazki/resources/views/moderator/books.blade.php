@@ -72,6 +72,26 @@
             position: sticky;
             bottom: 0;
         }
+        .pagination {
+    position: relative;
+    z-index: 0; 
+    
+}
+        .pagination .page-item.active .page-link {
+    background-color: #1A3636; 
+    border-color: #1A3636; 
+    color: white;
+}
+
+.pagination .page-link {
+    color: #1A3636; 
+}
+
+.pagination .page-link:hover {
+    background-color: #677D6A; 
+    border-color: #677D6A; 
+    color: white; 
+}
     </style>
 </head>
 <body>
@@ -214,7 +234,7 @@
 </tbody>
 </table>
   <div class="d-flex justify-content-center">
-    {{ $booksy->links() }}
+    {{ $books->links() }}
 </div>
 
 

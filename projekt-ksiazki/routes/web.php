@@ -34,217 +34,23 @@ Route::post('/update-profile', [UserBookController::class, 'updateProfile'])->na
 Route::post('/books/userlist/remove/{id}', [UserBookController::class, 'removeFromList'])->name('user.books.remove');
 Route::post('/books/userlist/edit/{id}', [UserBookController::class, 'editRating'])->name('user.books.edit');
 
-//Panel moda
+//Mod
+Route::get('/moderator', [ModeratorController::class, 'index'])->name('moderator.panel');
+Route::post('/moderator/update-nick/{id}', [ModeratorController::class, 'updateNick'])->name('moderator.updateNick');
+Route::post('/moderator/update-opis/{id}', [ModeratorController::class, 'updateOpis'])->name('moderator.updateOpis');
+Route::post('/moderator/delete-user/{id}', [ModeratorController::class, 'deleteUser'])->name('moderator.deleteUser');
+Route::post('/moderator/update-email/{id}', [ModeratorController::class, 'updateEmail'])->name('moderator.updateEmail');
+Route::post('/moderator/update-password/{id}', [ModeratorController::class, 'updatePassword'])->name('moderator.updatePassword');
 
-Route::get('/moderator', function (Request $request) {
-    if (session('user')) {
-        $user = session('user');
-        
-        $query = \App\Models\User::query();
-       
-        
-        
-        if ($request->has('search')) {
-            $search = $request->input('search');
-            $query->where(function ($q) use ($search) {
-                $q->where('imie', 'LIKE', "%{$search}%")
-                ->orWhere('email', 'LIKE', "%{$search}%")
-                ->orWhere('opis', 'LIKE', "%{$search}%");
-            });
-        }
-        
-        if ($user->rola === 'moderator') {
-           
-            $users = $query->where('rola', 'user')->get();
-        } elseif ($user->rola === 'administrator') {
-        
-            $users = $query->whereIn('rola', ['user', 'moderator'])->get();
-        } else {
-            return redirect()->route('home');
-        }
-        
-        
-        return view('moderator.panel', compact('users', 'user'));
-    }
-    return redirect()->route('home');
-})->name('moderator.panel');
+Route::get('/moderator/books', [ModeratorController::class, 'books'])->name('moderator.books');
+Route::post('/moderator/books/add', [ModeratorController::class, 'addBook'])->name('moderator.books.add');
+Route::post('/moderator/books/update-title/{id}', [ModeratorController::class, 'updateBookTitle'])->name('moderator.books.updateTitle');
+Route::post('/moderator/books/update-author/{id}', [ModeratorController::class, 'updateBookAuthor'])->name('moderator.books.updateAuthor');
+Route::post('/moderator/books/update-category/{id}', [ModeratorController::class, 'updateBookCategory'])->name('moderator.books.updateCategory');
+Route::post('/moderator/books/delete/{id}', [ModeratorController::class, 'deleteBook'])->name('moderator.books.delete');
 
-Route::post('/moderator/update-nick/{id}', function ($id, Request $request) {
-    $user = User::findOrFail($id);
-    $user->imie = $request->input('imie');
-    $user->save();
-    
-    return redirect()->route('moderator.panel')->with('success', 'Nick został zmieniony!');
-})->name('moderator.updateNick');
-
-Route::post('/moderator/update-opis/{id}', function ($id, Request $request) {
-    $user = User::findOrFail($id);
-    $user->opis = $request->input('opis');
-    $user->save();
-    
-    return redirect()->route('moderator.panel')->with('success', 'Opis został zmieniony!');
-})->name('moderator.updateOpis');
-
-Route::post('/moderator/delete-user/{id}', function ($id) {
-    $user = User::findOrFail($id);
-    $user->delete();
-    
-    return redirect()->route('moderator.panel')->with('success', 'Użytkownik został usunięty!');
-})->name('moderator.deleteUser');
-Route::post('/moderator/update-email/{id}', function ($id, Request $request) {
-    $user = \App\Models\User::findOrFail($id);
-    
-    if (!filter_var($request->input('email'), FILTER_VALIDATE_EMAIL)) {
-        return redirect()->route('moderator.panel')->with('error', 'Wprowadź poprawny adres e-mail.');
-    }
-    
-    if (\App\Models\User::where('email', $request->input('email'))->where('id', '!=', $user->id)->exists()) {
-        return redirect()->route('moderator.panel')->with('error', 'Ten e-mail jest już zajęty.');
-    }
-    
-    
-    $user->email = $request->input('email');
-    $user->save();
-    
-    return redirect()->route('moderator.panel')->with('success', 'E-mail został zmieniony!');
-})->name('moderator.updateEmail');
-
-Route::post('/moderator/update-password/{id}', function ($id, Request $request) {
-    $user = \App\Models\User::findOrFail($id);
-    $haslo = $request->input('haslo');
-    $haslo_confirmation = $request->input('haslo_confirmation');
-    if ($haslo !== $haslo_confirmation) {
-        return redirect()->route('moderator.panel')->with('error', 'Hasła nie są identyczne!');
-    }
-
-    $user->haslo = $request->input('haslo'); 
-    $user->save();
-    
-    return redirect()->route('moderator.panel')->with('success', 'Hasło zostało zmienione!');
-})->name('moderator.updatePassword');
-
-//Panel moda z książkami
-Route::get('/moderator/books', function (Request $request) {
-    if (session('user')) {
-        $user = session('user'); 
-        
-        if ($user->rola === 'moderator' || $user->rola === 'administrator') {
-            $query = \App\Models\Ksiazka::query();
-            $booksy = $query->paginate(15);
-          
-            $categories = \App\Models\Kategoria::pluck('nazwa');
-            
-         
-            if ($request->has('search')) {
-                $search = $request->input('search');
-                $query->where('tytul', 'LIKE', "%{$search}%")
-                ->orWhere('autor', 'LIKE', "%{$search}%")
-                ->orWhereHas('kategoria', function ($q) use ($search) {
-                    $q->where('nazwa', 'LIKE', "%{$search}%");
-                });
-            }
-            
-          
-            $books = $query->get();
-            
-            return view('moderator.books', compact('books', 'user', 'categories', 'booksy'));
-        }
-    }
-    return redirect()->route('home');
-})->name('moderator.books');
-
-
-
-Route::post('/moderator/books/add', function (Request $request) {
-    // Walidacja formularza
-    $validated = $request->validate([
-        'tytul' => 'required|string|max:255',
-        'autor' => 'required|string|max:255',
-        'kategoria' => 'required|string|max:255', 
-    ]);
-    
-    // Sprawdzenie czy kategoria już istnieje
-    $kategoria = \App\Models\Kategoria::firstOrCreate(['nazwa' => $validated['kategoria']]);
-    
-    // Tworzenie książki
-    $book = new \App\Models\Ksiazka();
-    $book->tytul = $validated['tytul'];
-    $book->autor = $validated['autor'];
-    $book->kategoria_id = $kategoria->id;
-    $book->save();
-    
-    return redirect()->route('moderator.books')->with('success', 'Książka została dodana!');
-})->name('moderator.books.add');
-
-
-
-Route::post('/moderator/books/update-title/{id}', function ($id, Request $request) {
-    $book = \App\Models\Ksiazka::findOrFail($id);
-    $book->tytul = $request->input('tytul');
-    $book->zaktualizowano = now();
-    $book->save();
-    
-    return redirect()->route('moderator.books')->with('success', 'Tytuł książki został zaktualizowany!');
-})->name('moderator.books.updateTitle');
-
-
-Route::post('/moderator/books/update-author/{id}', function ($id, Request $request) {
-    $book = \App\Models\Ksiazka::findOrFail($id);
-    $book->autor = $request->input('autor');
-    $book->zaktualizowano = now();
-    $book->save();
-    
-    return redirect()->route('moderator.books')->with('success', 'Autor książki został zaktualizowany!');
-})->name('moderator.books.updateAuthor');
-
-
-Route::post('/moderator/books/update-category/{id}', function ($id, Request $request) {
-    $book = \App\Models\Ksiazka::findOrFail($id);
-    
-    $kategoria = \App\Models\Kategoria::where('nazwa', $request->input('kategoria'))->first();
-    if (!$kategoria) {
-        $kategoria = new \App\Models\Kategoria();
-        $kategoria->nazwa = $request->input('kategoria');
-        $kategoria->save();
-    }
-    
-    $book->kategoria_id = $kategoria->id;
-    $book->zaktualizowano = now();
-    $book->save();
-    
-    return redirect()->route('moderator.books')->with('success', 'Kategoria książki została zaktualizowana!');
-})->name('moderator.books.updateCategory');
-
-
-Route::post('/moderator/books/delete/{id}', function ($id) {
-    $user = session('user');
-    
-    if ($user->rola === 'moderator' || $user->rola === 'administrator') {
-        $book = \App\Models\Ksiazka::findOrFail($id);
-        $book->delete();
-        return redirect()->route('moderator.books')->with('success', 'Książka została usunięta!');
-    }
-    
-    return redirect()->route('moderator.books')->with('error', 'Brak uprawnień do usunięcia książki.');
-})->name('moderator.books.delete');
-
-//banowanie
-Route::post('/moderator/ban-user/{id}', function ($id) {
-    $user = \App\Models\User::findOrFail($id);
-    $user->banned = 1;
-    $user->save();
-    
-    return redirect()->route('moderator.panel')->with('success', 'Użytkownik został zablokowany!');
-})->name('moderator.banUser');
-
-//odbanowywanie
-Route::post('/moderator/unban-user/{id}', function ($id) {
-    $user = \App\Models\User::findOrFail($id);
-    $user->banned = 0;
-    $user->save();
-    
-    return redirect()->route('moderator.panel')->with('success', 'Użytkownik został odblokowany!');
-})->name('moderator.unbanUser');
+Route::post('/moderator/ban-user/{id}', [ModeratorController::class, 'banUser'])->name('moderator.banUser');
+Route::post('/moderator/unban-user/{id}', [ModeratorController::class, 'unbanUser'])->name('moderator.unbanUser');
 
 // Login i rejestracja
 Route::get('/login', function () {
