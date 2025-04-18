@@ -288,18 +288,68 @@ h1.text-center {
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        function openModal(bookId, bookTitle) {
-            document.getElementById("bookTitle").textContent = "Ocena dla: " + bookTitle;
-            document.getElementById("bookId").value = bookId;
-            document.getElementById("ratingForm").action = "/projekt-ksiazki/public/books/add/" + bookId;
+    function openModal(bookId, bookTitle) {
+        document.getElementById("bookTitle").textContent = "Ocena dla: " + bookTitle;
+        document.getElementById("bookId").value = bookId;
 
-            var myModal = new bootstrap.Modal(document.getElementById('ratingModal'), {
-                keyboard: false
+        let myModal = new bootstrap.Modal(document.getElementById('ratingModal'), {
+            keyboard: false
+        });
+
+        myModal.show();
+    }
+
+    document.addEventListener("DOMContentLoaded", function () {
+        const form = document.getElementById("ratingForm");
+
+        form.addEventListener("submit", function (e) {
+            e.preventDefault();
+
+            const bookId = document.getElementById("bookId").value;
+            const ocena = document.getElementById("rating").value;
+            const csrfToken = document.querySelector('input[name="_token"]').value;
+
+            fetch("{{ route('books.ajaxAdd') }}", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                    "X-CSRF-TOKEN": csrfToken
+                },
+                body: JSON.stringify({
+                    book_id: bookId,
+                    ocena: ocena
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                const modal = bootstrap.Modal.getInstance(document.getElementById('ratingModal'));
+                modal.hide();
+
+                const alertBox = document.createElement("div");
+                alertBox.classList.add("alert", "mt-3");
+
+                if (data.success) {
+                    alertBox.classList.add("alert-success");
+                } else {
+                    alertBox.classList.add("alert-danger");
+                }
+
+                alertBox.textContent = data.message;
+
+                const main = document.querySelector("main");
+                main.insertBefore(alertBox, main.firstChild);
+
+                setTimeout(() => {
+                    alertBox.remove();
+                }, 4000);
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Wystąpił błąd sieci.");
             });
-
-            myModal.show();
-        }
-    </script>
+        });
+    });
+</script>
 
 </body>
 </html>

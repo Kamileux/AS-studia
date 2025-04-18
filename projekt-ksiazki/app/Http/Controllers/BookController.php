@@ -36,42 +36,39 @@ class BookController extends Controller
     }
     
 
-    public function addToList($id, Request $request)
+    public function ajaxAddToList(Request $request)
     {
         $user = $request->session()->get('user');
         
         if (!$user) {
-            return redirect()->route('login')->withErrors(['error' => 'Musisz być zalogowany, aby dodać książkę do listy.']);
+            return response()->json(['success' => false, 'message' => 'Musisz być zalogowany.'], 401);
         }
         
-        
+        $bookId = $request->input('book_id');
         $ocena = $request->input('ocena');
         
-        
         if ($ocena < 0 || $ocena > 5 || fmod($ocena, 0.5) != 0) {
-            return redirect()->route('books')->with('error', 'Ocena musi być liczbą od 0 do 5 z połówkami.');
+            return response()->json(['success' => false, 'message' => 'Ocena musi być od 0 do 5']);
         }
         
-      
         $exists = DB::table('uzytkownicy_ksiazki')
         ->where('uzytkownik_id', $user->id)
-        ->where('ksiazka_id', $id)
+        ->where('ksiazka_id', $bookId)
         ->exists();
         
         if ($exists) {
-            return redirect()->route('books')->with('error', 'Ta książka już jest na Twojej liście.');
+            return response()->json(['success' => false, 'message' => 'Ta książka już jest na Twojej liście.']);
         }
         
-       
         DB::table('uzytkownicy_ksiazki')->insert([
             'uzytkownik_id' => $user->id,
-            'ksiazka_id' => $id,
+            'ksiazka_id' => $bookId,
             'ocena' => $ocena,
             'utworzono' => now(),
             'zaktualizowano' => now(),
         ]);
         
-        return redirect()->route('books')->with('success', 'Pomyślnie dodano książkę na listę.');
+        return response()->json(['success' => true, 'message' => 'Dodano książkę do listy!']);
     }
     
 

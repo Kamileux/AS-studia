@@ -4,6 +4,10 @@
 - Zmiana tabeli w bazie danych z utf8mb4 na utf8mb4_polish_ci w celu poprawnego sortowania alfabetycznego
 - Dodanie stronicowania w panelu moderatora panel.blade.php i books.blade.php i metody w web.php 
 
+
+18.04.2025
+- Implementacja AJAX na głównej liście książek, po dodaniu ksiązki na listy nie ładuje od nowa strony.
+
 TODO
 - Zewnętrzny cs dla lepszej czytelności kodu 
 - Metody z routingu do osobnego kontrolera jednak // Zrobione 10.04.2025

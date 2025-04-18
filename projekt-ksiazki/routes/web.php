@@ -26,7 +26,7 @@ Route::get('/', function () {
 
 // Ksiazki
 Route::get('/books', [BookController::class, 'index'])->name('books');
-Route::post('/books/add/{id}', [BookController::class, 'addToList'])->name('add-to-list');
+Route::post('/books/ajax-add', [BookController::class, 'ajaxAddToList'])->name('books.ajaxAdd');
 
 //Lista usera
 Route::get('/books/userlist', [UserBookController::class, 'userBookList'])->name('user.books');
