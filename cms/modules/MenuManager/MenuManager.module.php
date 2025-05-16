@@ -108,7 +108,9 @@ final class MenuManager extends CMSModule
 	reset($children);
 	$nchildren = count($children);
 	$nc = -1;
-	while (list($key) = each($children)) {
+	
+  
+  foreach (array_keys($children) as $key) {
 	  $nc++;
 	  $onechild =& $children[$key];
 	  $content = $onechild->GetContent($deep);
