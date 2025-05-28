@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.5.2, created on 2025-05-16 21:57:04
+/* Smarty version 4.5.2, created on 2025-05-28 18:03:16
   from 'module_file_tpl:CMSContentManager;ajax_get_content.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.2',
-  'unifunc' => 'content_682798902bfb00_72606614',
+  'unifunc' => 'content_683733c49b6d92_64328223',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,13 +20,13 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_682798902bfb00_72606614 (Smarty_Internal_Template $_smarty_tpl) {
+function content_683733c49b6d92_64328223 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->smarty->ext->_tplFunction->registerTplFunctions($_smarty_tpl, array (
   'do_content_row' => 
   array (
     'compiled_filepath' => 'C:\\xampp\\htdocs\\cms\\tmp\\templates_c\\CMSContentManager^bfb6b21f65f4aa114b45d2ad3949b70b47fbc561_0.module_file_tpl.CMSContentManagerajax_get_content.tpl.php',
     'uid' => 'bfb6b21f65f4aa114b45d2ad3949b70b47fbc561',
-    'call_name' => 'smarty_template_function_do_content_row_65123548568279890033d28_98244019',
+    'call_name' => 'smarty_template_function_do_content_row_100464466683733c48bc3e7_41938544',
   ),
 ));
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.cms_action_url.php','function'=>'smarty_cms_function_cms_action_url',),1=>array('file'=>'C:\\xampp\\htdocs\\cms\\admin\\plugins\\function.admin_icon.php','function'=>'smarty_function_admin_icon',),2=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.form_start.php','function'=>'smarty_function_form_start',),3=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\smarty\\plugins\\function.html_options.php','function'=>'smarty_function_html_options',),4=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.form_end.php','function'=>'smarty_function_form_end',),5=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\smarty\\plugins\\function.cycle.php','function'=>'smarty_function_cycle',),));
@@ -181,9 +181,9 @@ echo smarty_function_form_end(array(),$_smarty_tpl);?>
 
 <div class="clearb"></div>
 <?php }
-/* smarty_template_function_do_content_row_65123548568279890033d28_98244019 */
-if (!function_exists('smarty_template_function_do_content_row_65123548568279890033d28_98244019')) {
-function smarty_template_function_do_content_row_65123548568279890033d28_98244019(Smarty_Internal_Template $_smarty_tpl,$params) {
+/* smarty_template_function_do_content_row_100464466683733c48bc3e7_41938544 */
+if (!function_exists('smarty_template_function_do_content_row_100464466683733c48bc3e7_41938544')) {
+function smarty_template_function_do_content_row_100464466683733c48bc3e7_41938544(Smarty_Internal_Template $_smarty_tpl,$params) {
 foreach ($params as $key => $value) {
 $_smarty_tpl->tpl_vars[$key] = new Smarty_Variable($value, $_smarty_tpl->isRenderingCache);
 }
@@ -446,5 +446,5 @@ multicontent[]" value="<?php echo $_smarty_tpl->tpl_vars['row']->value['id'];?>
 $_smarty_tpl->smarty->ext->_foreach->restore($_smarty_tpl, 1);?>
     <?php
 }}
-/*/ smarty_template_function_do_content_row_65123548568279890033d28_98244019 */
+/*/ smarty_template_function_do_content_row_100464466683733c48bc3e7_41938544 */
 }

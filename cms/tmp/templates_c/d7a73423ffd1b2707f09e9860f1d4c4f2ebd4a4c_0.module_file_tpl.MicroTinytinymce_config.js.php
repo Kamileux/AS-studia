@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.5.2, created on 2025-05-16 21:41:36
+/* Smarty version 4.5.2, created on 2025-05-28 18:09:43
   from 'module_file_tpl:MicroTiny;tinymce_config.js' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.2',
-  'unifunc' => 'content_682794f0b21352_61984148',
+  'unifunc' => 'content_68373547494419_68979168',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_682794f0b21352_61984148 (Smarty_Internal_Template $_smarty_tpl) {
+function content_68373547494419_68979168 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.root_url.php','function'=>'smarty_function_root_url',),1=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.cms_stylesheet.php','function'=>'smarty_function_cms_stylesheet',),));
 ?>
 // define cmsms_tiny object

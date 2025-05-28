@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.5.2, created on 2025-05-16 21:47:58
+/* Smarty version 4.5.2, created on 2025-05-28 18:03:08
   from 'module_file_tpl:DesignManager;defaultadmin.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.2',
-  'unifunc' => 'content_6827966ed47448_76676731',
+  'unifunc' => 'content_683733bce750e1_96043565',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -25,7 +25,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
     'module_file_tpl:DesignManager;admin_defaultadmin_categories.tpl' => 1,
   ),
 ),false)) {
-function content_6827966ed47448_76676731 (Smarty_Internal_Template $_smarty_tpl) {
+function content_683733bce750e1_96043565 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\cms\\admin\\plugins\\function.tab_header.php','function'=>'smarty_function_tab_header',),1=>array('file'=>'C:\\xampp\\htdocs\\cms\\admin\\plugins\\function.tab_start.php','function'=>'smarty_function_tab_start',),2=>array('file'=>'C:\\xampp\\htdocs\\cms\\admin\\plugins\\function.tab_end.php','function'=>'smarty_function_tab_end',),));
 echo '<script'; ?>
  type="text/javascript">

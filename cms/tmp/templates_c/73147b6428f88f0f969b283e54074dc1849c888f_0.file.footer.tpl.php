@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.5.2, created on 2025-05-06 22:32:10
+/* Smarty version 4.5.2, created on 2025-05-28 17:58:36
   from 'C:\xampp\htdocs\cms\admin\themes\OneEleven\templates\footer.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.2',
-  'unifunc' => 'content_681a71ca035617_68985407',
+  'unifunc' => 'content_683732ac1e5b24_74154162',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_681a71ca035617_68985407 (Smarty_Internal_Template $_smarty_tpl) {
+function content_683732ac1e5b24_74154162 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.cms_version.php','function'=>'smarty_function_cms_version',),1=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\function.cms_versionname.php','function'=>'smarty_function_cms_versionname',),));
 ?>
 <footer id="oe_footer" class="cf"><div class="footer-left"><small class="copyright">Copyright &copy; <a rel="external" href="http://www.cmsmadesimple.org">CMS Made Simple&trade; <?php echo smarty_function_cms_version(array(),$_smarty_tpl);?>

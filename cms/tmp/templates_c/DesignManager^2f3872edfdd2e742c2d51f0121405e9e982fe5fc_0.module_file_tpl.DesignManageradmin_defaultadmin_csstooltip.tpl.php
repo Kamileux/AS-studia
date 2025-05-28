@@ -1,11 +1,11 @@
 <?php
-/* Smarty version 4.5.2, created on 2025-05-16 21:54:50
+/* Smarty version 4.5.2, created on 2025-05-28 18:03:11
   from 'module_file_tpl:DesignManager;admin_defaultadmin_csstooltip.tpl' */
 
 /* @var Smarty_Internal_Template $_smarty_tpl */
 if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   'version' => '4.5.2',
-  'unifunc' => 'content_6827980ad4f1e9_59365003',
+  'unifunc' => 'content_683733bfa1ae82_81523329',
   'has_nocache_code' => false,
   'file_dependency' => 
   array (
@@ -20,7 +20,7 @@ if ($_smarty_tpl->_decodeProperties($_smarty_tpl, array (
   array (
   ),
 ),false)) {
-function content_6827980ad4f1e9_59365003 (Smarty_Internal_Template $_smarty_tpl) {
+function content_683733bfa1ae82_81523329 (Smarty_Internal_Template $_smarty_tpl) {
 $_smarty_tpl->_checkPlugins(array(0=>array('file'=>'C:\\xampp\\htdocs\\cms\\admin\\plugins\\function.cms_admin_user.php','function'=>'smarty_function_cms_admin_user',),1=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\modifier.localedate_format.php','function'=>'smarty_modifier_localedate_format',),2=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\modifier.relative_time.php','function'=>'smarty_modifier_relative_time',),3=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\modifier.cms_date_format.php','function'=>'smarty_modifier_cms_date_format',),4=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\modifier.cms_escape.php','function'=>'smarty_modifier_cms_escape',),5=>array('file'=>'C:\\xampp\\htdocs\\cms\\lib\\plugins\\modifier.summarize.php','function'=>'smarty_modifier_summarize',),));
 if ($_smarty_tpl->tpl_vars['css']->value->locked()) {
 $_smarty_tpl->_assignInScope('lock', $_smarty_tpl->tpl_vars['css']->value->get_lock());
